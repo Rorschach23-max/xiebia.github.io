@@ -1,0 +1,39 @@
+name: 部署到GitHub Pages
+
+on:
+  push:
+    branches:
+      - winter  # 当winter分支有推送时触发
+    paths-ignore:
+      - '**.md'
+  workflow_dispatch:  # 允许手动触发
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v3
+      
+      - name: 设置Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      
+      - name: 安装pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      
+      - name: 安装依赖
+        run: pnpm install
+      
+      - name: 构建
+        run: pnpm build
+      
+      - name: 部署到GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist  # 发布dist目录的内容
+          publish_branch: gh-pages  # 部署到gh-pages分支 

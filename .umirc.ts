@@ -31,4 +31,6 @@ export default defineConfig({
     },
   ],
   npmClient: 'pnpm',
+  base: '/xiebia.github.io/',
+  publicPath: '/xiebia.github.io/',
 });
