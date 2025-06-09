@@ -31,8 +31,8 @@ export default defineConfig({
     },
   ],
   npmClient: 'pnpm',
-  base: './',
-  publicPath: './',
+  base: '/',
+  publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
   history: {
     type: 'hash',
   },
