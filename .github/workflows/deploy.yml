@@ -8,6 +8,10 @@ on:
       - '**.md'
   workflow_dispatch:  # 允许手动触发
 
+# 添加权限设置
+permissions:
+  contents: write
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
