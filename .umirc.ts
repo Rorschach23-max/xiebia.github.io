@@ -7,7 +7,7 @@ export default defineConfig({
   initialState: {},
   request: {},
   layout: {
-    title: '@umijs/max',
+    title: 'xiebia',
   },
   routes: [
     {
@@ -29,11 +29,19 @@ export default defineConfig({
       path: '/table',
       component: './Table',
     },
+    {
+      name: 'xiebia',
+      path: '/xiebia',
+      component: './Xiebia',
+    },
   ],
   npmClient: 'pnpm',
   base: '/',
   publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
   history: {
     type: 'hash',
+  },
+  alias: {
+    '@': './src',
   },
 });
