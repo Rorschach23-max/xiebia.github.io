@@ -18,5 +18,6 @@ export const layout = () => {
     footerRender: false, // 移除底部footer
     rightContentRender: false, // 移除右上角内容
     actionsRender: false, // 移除侧边栏底部操作区
+    menuRender: false, // 关闭侧边栏菜单
   };
 };
