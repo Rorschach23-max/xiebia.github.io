@@ -1,0 +1,123 @@
+.introduction {
+  width: 672px;
+  height: 392px;
+  display: flex;
+  flex-direction: column;
+  padding: 32px;
+  gap: 0px 10px;
+  align-items: center;
+  z-index: 1;
+  border-radius: 24px;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.001), rgba(0, 0, 0, 0.001)),
+    rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(12px);
+  box-shadow: 0px 4px 6px -4px rgba(0, 0, 0, 0.1), 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+
+  .introductionContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 608px;
+    height: 328px;
+
+    .avatar {
+      border-radius: 9999px;
+      background: linear-gradient(0deg, rgba(0, 0, 0, 0.001), rgba(0, 0, 0, 0.001)),
+        rgba(0, 0, 0, 0);
+      box-sizing: border-box;
+      border: 4px solid #ffffff;
+      box-shadow: 0px 4px 6px -4px rgba(0, 0, 0, 0.1), 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: transform 0.6s ease;
+
+      &:hover {
+        transform: rotateX(180deg);
+      }
+
+      img {
+        width: 128px;
+        height: 128px;
+        transition: transform 0.6s ease;
+      }
+
+      &:hover img {
+        transform: rotateX(180deg);
+      }
+    }
+
+    .firstName {
+      font-family: OPPOSans;
+      font-size: 30px;
+      font-weight: bold;
+      line-height: 36px;
+      text-align: center;
+      letter-spacing: normal;
+      color: #1f2937;
+    }
+
+    .secondName {
+      font-family: Roboto;
+      font-size: 18px;
+      font-weight: normal;
+      line-height: 28px;
+      text-align: center;
+      letter-spacing: normal;
+      color: #4b5563;
+    }
+
+    .saying {
+      font-family: Roboto;
+      font-size: 16px;
+      font-weight: normal;
+      line-height: 24px;
+      text-align: center;
+      letter-spacing: normal;
+      color: #4b5563;
+    }
+
+    .socialMedia {
+      height: 32px;
+      display: flex;
+      padding: 0px;
+      gap: 0px 10px;
+      z-index: 2;
+      border-radius: 4px;
+
+      .socialMediaItem {
+        width: 102.63px;
+        height: 32px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 4px 15px;
+        gap: 0px 8px;
+        align-content: center;
+        z-index: 0;
+        border-radius: 4px;
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0.001), rgba(0, 0, 0, 0.001)),
+          rgba(255, 255, 255, 0.8);
+        box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.02);
+        cursor: pointer;
+
+        img {
+          width: 20px;
+          height: 20px;
+        }
+
+        span {
+          font-family: Inter;
+          font-size: 14px;
+          font-weight: normal;
+          line-height: 22px;
+          letter-spacing: normal;
+          color: rgba(0, 0, 0, 0.88);
+        }
+
+        &:hover {
+          box-shadow: 0px 4px 6px -4px rgba(0, 0, 0, 0.1), 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+      }
+    }
+  }
+}

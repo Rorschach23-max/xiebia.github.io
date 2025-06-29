@@ -28,4 +28,8 @@ export default defineConfig({
   alias: {
     '@': './src',
   },
+  favicons: [
+    // 指向 public 目录下的自定义图标
+    '/icons/favicon.ico',
+  ],
 });

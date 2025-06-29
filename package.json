@@ -5,6 +5,11 @@
     "build": "max build",
     "dev": "max dev",
     "format": "prettier --cache --write .",
+    "format:check": "prettier --check .",
+    "lint": "eslint src --ext .ts,.tsx,.js,.jsx",
+    "lint:fix": "eslint src --ext .ts,.tsx,.js,.jsx --fix",
+    "lint:style": "stylelint \"src/**/*.{css,less,scss}\"",
+    "lint:style:fix": "stylelint \"src/**/*.{css,less,scss}\" --fix",
     "postinstall": "max setup",
     "prepare": "husky",
     "setup": "max setup",
@@ -24,11 +29,17 @@
   "devDependencies": {
     "@types/react": "^18.0.33",
     "@types/react-dom": "^18.0.11",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "husky": "^9",
     "lint-staged": "^13.2.0",
     "prettier": "^2.8.7",
     "prettier-plugin-organize-imports": "^3.2.2",
     "prettier-plugin-packagejson": "^2.4.3",
+    "stylelint-config-standard": "^34.0.0",
+    "svg-sprite-loader": "^6.0.11",
     "typescript": "^5.0.3"
   }
 }

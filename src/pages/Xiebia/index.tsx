@@ -1,17 +1,17 @@
+import Header from '@/components/Header';
 import { Button, Form, Input, message, Modal } from 'antd';
 import React, { useEffect, useRef, useState } from 'react';
-import styles from './index.less'
+import Introduction from './components/Introduction';
+import MaskContainer from './components/MaskContainer';
+import styles from './index.less';
 
 /* 心形的canvas */
 const HeartCanvas: React.FC<
   React.HTMLAttributes<HTMLDivElement> & {
     isVisible?: boolean;
   }
-> = (props) => {
-  const {
-    isVisible = true,
-    ...divProps
-  } = props;
+> = props => {
+  const { isVisible = true, ...divProps } = props;
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number | null>(null);
   const heartPointsRef = useRef<Array<[number, number, number]>>([]);
@@ -56,9 +56,7 @@ const HeartCanvas: React.FC<
     };
 
     // 预生成心形点（仅执行一次）
-    const generateHeartPoints = (
-      count: number,
-    ): Array<[number, number, number]> => {
+    const generateHeartPoints = (count: number): Array<[number, number, number]> => {
       const points: Array<[number, number, number]> = [];
       let attempts = 0;
       const maxAttempts = count * 20; // 增加尝试次数
@@ -85,9 +83,7 @@ const HeartCanvas: React.FC<
           ];
 
           // 计算距离，去除太靠近中心的点
-          const dist = Math.sqrt(
-            point[0] * point[0] + point[1] * point[1] + point[2] * point[2],
-          );
+          const dist = Math.sqrt(point[0] * point[0] + point[1] * point[1] + point[2] * point[2]);
           if (dist >= 0.1 && dist <= 1.5) {
             points.push(point);
 
@@ -99,16 +95,12 @@ const HeartCanvas: React.FC<
         }
       }
 
-      console.log(
-        `心形点生成完成，尝试次数: ${attempts}, 成功生成: ${points.length}`,
-      );
+      console.log(`心形点生成完成，尝试次数: ${attempts}, 成功生成: ${points.length}`);
       return points;
     };
 
     // 使用经典的心形参数方程作为备选方案
-    const generateHeartPointsParametric = (
-      count: number,
-    ): Array<[number, number, number]> => {
+    const generateHeartPointsParametric = (count: number): Array<[number, number, number]> => {
       const points: Array<[number, number, number]> = [];
 
       console.log('使用参数方程生成心形点...');
@@ -124,10 +116,7 @@ const HeartCanvas: React.FC<
         // 经典心形参数方程
         const baseX = 16 * Math.pow(Math.sin(t), 3);
         const baseY =
-          13 * Math.cos(t) -
-          5 * Math.cos(2 * t) -
-          2 * Math.cos(3 * t) -
-          Math.cos(4 * t);
+          13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t);
 
         // 在每个角度位置生成多个点
         for (let j = 0; j < pointsPerAngle && points.length < count; j++) {
@@ -157,9 +146,7 @@ const HeartCanvas: React.FC<
     };
 
     // 新增：基于参数方程的3D心形生成（更可靠的方法）
-    const generateHeartPointsParametric3D = (
-      count: number,
-    ): Array<[number, number, number]> => {
+    const generateHeartPointsParametric3D = (count: number): Array<[number, number, number]> => {
       const points: Array<[number, number, number]> = [];
 
       console.log('使用3D参数方程生成心形点...');
@@ -178,10 +165,7 @@ const HeartCanvas: React.FC<
           // 心形参数方程
           const x = 16 * Math.pow(Math.sin(t), 3) * layerScale;
           const y =
-            (13 * Math.cos(t) -
-              5 * Math.cos(2 * t) -
-              2 * Math.cos(3 * t) -
-              Math.cos(4 * t)) *
+            (13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t)) *
             layerScale;
 
           // 归一化并缩放
@@ -214,20 +198,18 @@ const HeartCanvas: React.FC<
       if (basePoints.length === 0) return [];
 
       const points = basePoints.slice(0, randomParticleCount);
-      return points.map((point) => {
+      return points.map(point => {
         const randScale = 1 + (Math.random() * 2 - 1) * maxVar;
-        return [
-          point[0] * randScale,
-          point[1] * randScale,
-          point[2] * randScale,
-        ] as [number, number, number];
+        return [point[0] * randScale, point[1] * randScale, point[2] * randScale] as [
+          number,
+          number,
+          number,
+        ];
       });
     };
 
     // 世界坐标到屏幕坐标转换
-    const worldToScreen = (
-      point: [number, number, number],
-    ): [number, number] => {
+    const worldToScreen = (point: [number, number, number]): [number, number] => {
       const depth = 2;
       const scale = 500; // 调整缩放比例，从350增加到500
       const factor = depth / (depth + point[2]);
@@ -316,26 +298,19 @@ const HeartCanvas: React.FC<
       // 如果3D参数方程生成的点不够，补充使用普通参数方程
       if (mainPoints.length < particleCount * 0.8) {
         console.log('3D参数方程生成点数不足，补充使用普通参数方程');
-        const additionalPoints = generateHeartPointsParametric(
-          particleCount - mainPoints.length,
-        );
+        const additionalPoints = generateHeartPointsParametric(particleCount - mainPoints.length);
         mainPoints = [...mainPoints, ...additionalPoints];
       }
 
       // 最后才尝试3D方程方法（作为备选）
       if (mainPoints.length < particleCount * 0.5) {
         console.log('参数方程生成点数不足，尝试3D方程方法');
-        const equationPoints = generateHeartPoints(
-          particleCount - mainPoints.length,
-        );
+        const equationPoints = generateHeartPoints(particleCount - mainPoints.length);
         mainPoints = [...mainPoints, ...equationPoints];
       }
 
       heartPointsRef.current = mainPoints;
-      randomPointsRef.current = generateRandomHeartPoints(
-        heartPointsRef.current,
-        randomMaxVar,
-      );
+      randomPointsRef.current = generateRandomHeartPoints(heartPointsRef.current, randomMaxVar);
 
       console.log(
         `生成完成: ${heartPointsRef.current.length} 个主点, ${randomPointsRef.current.length} 个随机点`,
@@ -352,9 +327,9 @@ const HeartCanvas: React.FC<
       const mainScale = 1.2 + ratio * 0.4;
       const randomScale = 1.2 + randomRatio * 0.4;
 
-            // 绘制主心形点（轮廓点）- 性能优化
+      // 绘制主心形点（轮廓点）- 性能优化
       const mainPoints = heartPointsRef.current;
-      
+
       for (let i = 0; i < mainPoints.length; i++) {
         const point = mainPoints[i];
 
@@ -379,10 +354,8 @@ const HeartCanvas: React.FC<
         }
 
         // 预计算深度，避免重复计算
-        const depth = Math.sqrt(
-          point[0] * point[0] + point[1] * point[1] + point[2] * point[2],
-        );
-        
+        const depth = Math.sqrt(point[0] * point[0] + point[1] * point[1] + point[2] * point[2]);
+
         // 使用固定算法代替随机，提高性能
         const size = 1.2 + ((depth * 3) % 1.8);
         const color = getColor(depth);
@@ -396,7 +369,7 @@ const HeartCanvas: React.FC<
 
       // 绘制随机心形点（其他点）- 性能优化
       const randomPoints = randomPointsRef.current;
-      
+
       for (let i = 0; i < randomPoints.length; i++) {
         const point = randomPoints[i];
 
@@ -419,10 +392,8 @@ const HeartCanvas: React.FC<
           continue;
         }
 
-        const depth = Math.sqrt(
-          point[0] * point[0] + point[1] * point[1] + point[2] * point[2],
-        );
-        
+        const depth = Math.sqrt(point[0] * point[0] + point[1] * point[1] + point[2] * point[2]);
+
         // 使用固定算法代替随机
         const size = 0.8 + ((depth * 2) % 1.2);
         const color = getColor(depth, true);
@@ -447,8 +418,7 @@ const HeartCanvas: React.FC<
       // 使用更平滑的动画函数
       const animationRatio = (Math.sin(frameRatio * Math.PI * 2) + 1) / 2;
       // 让其他点使用相同的跳动速度，但可以有轻微的相位差
-      const randomRatio =
-        (Math.sin(frameRatio * Math.PI * 2 + Math.PI / 4) + 1) / 2;
+      const randomRatio = (Math.sin(frameRatio * Math.PI * 2 + Math.PI / 4) + 1) / 2;
 
       drawHeart(animationRatio, randomRatio);
 
@@ -571,7 +541,7 @@ const HomePage: React.FC = () => {
   const [showHeart, setShowHeart] = useState(false);
 
   return (
-    <div style={{ textAlign: 'center', marginTop: '20px'}}>
+    <div>
       {/* <h2>复现一下</h2>
       <div style={{ marginBottom: '20px' }}>
         <Button
@@ -591,14 +561,11 @@ const HomePage: React.FC = () => {
         <InputModal />
       </div> */}
       <div>
-         <div className={styles.navHeader}>
-            <div className={styles.navHeaderLeft}>
-               XieBia
-            </div>
-         </div>
-         <div className={styles.content}>
-        
-         </div>
+        <Header />
+        <div className={styles.content}>
+          <Introduction />
+          <MaskContainer />
+        </div>
       </div>
     </div>
   );

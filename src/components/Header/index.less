@@ -1,0 +1,43 @@
+.navHeader {
+  width: 100%;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.001), rgba(0, 0, 0, 0.001)),
+    rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(4px);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .navHeaderLeft {
+    margin-left: 96px;
+    font-family: OPPOSans;
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 32px;
+    letter-spacing: normal;
+    color: #db2777;
+  }
+
+  .navHeaderRight {
+    margin-right: 96px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 34px;
+
+    .headerItem {
+      font-family: Inter;
+      font-size: 14px;
+      font-weight: normal;
+      line-height: 22px;
+      text-align: center;
+      letter-spacing: normal;
+      color: #4b5563;
+      cursor: pointer;
+    }
+  }
+}

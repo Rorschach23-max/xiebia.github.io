@@ -6,7 +6,7 @@ interface CreateFormProps {
   onCancel: () => void;
 }
 
-const CreateForm: React.FC<PropsWithChildren<CreateFormProps>> = (props) => {
+const CreateForm: React.FC<PropsWithChildren<CreateFormProps>> = props => {
   const { modalVisible, onCancel } = props;
 
   return (
