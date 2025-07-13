@@ -1,7 +1,6 @@
 .navHeader {
   width: 100%;
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.001), rgba(0, 0, 0, 0.001)),
-    rgba(255, 255, 255, 0.8);
+  background: linear-gradient(0deg, rgb(0 0 0 / 0.1%), rgb(0 0 0 / 0.1%)), rgb(255 255 255 / 80%);
   backdrop-filter: blur(4px);
   position: fixed;
   top: 0;
@@ -11,6 +10,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  ::selection {
+    background: #e87782;
+  }
 
   .navHeaderLeft {
     margin-left: 96px;
@@ -38,6 +40,19 @@
       letter-spacing: normal;
       color: #4b5563;
       cursor: pointer;
+      transition: all 0.3s ease;
+      padding: 8px 16px;
+      border-radius: 8px;
+
+      &:hover {
+        color: #db2777;
+        background: rgba(219, 39, 119, 0.1);
+        transform: translateY(-1px);
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
     }
   }
 }

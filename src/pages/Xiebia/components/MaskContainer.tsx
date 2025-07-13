@@ -1,39 +1,14 @@
+import { MaskItem, maskList } from '@/constants';
 import React, { useEffect, useState } from 'react';
 import styles from './MaskContainer.less';
 
-interface MaskItem {
-  id: number;
-  name: string;
+interface MaskContainerProps {
+  onMaskClick?: (mask: MaskItem) => void;
 }
 
-const MaskContainer: React.FC = () => {
+const MaskContainer: React.FC<MaskContainerProps> = ({ onMaskClick }) => {
   const [randomMasks, setRandomMasks] = useState<Array<MaskItem>>([]);
   const [flippingIndexes, setFlippingIndexes] = useState<Set<number>>(new Set());
-
-  const maskList: MaskItem[] = [
-    { id: 0, name: '蟹老师' },
-    { id: 1, name: 'biabia' },
-    { id: 2, name: '好汉' },
-    { id: 3, name: 'xiebia' },
-    { id: 5, name: 'bia姐' },
-    { id: 6, name: '尼拔' },
-    { id: 7, name: '耶路撒冷' },
-    { id: 8, name: '神奇女侠' },
-    { id: 9, name: '北海鲛人' },
-    { id: 10, name: '蝙蝠侠' },
-    { id: 11, name: '小皇帝' },
-    { id: 12, name: '路见不平biabia蟹' },
-    { id: 13, name: '魅魔蟹' },
-    { id: 14, name: '蟹女明星' },
-    { id: 15, name: '蟹宝王' },
-    { id: 16, name: '蟹伯乐' },
-    { id: 17, name: '面具蟹' },
-    { id: 18, name: '小怂蟹' },
-    { id: 19, name: '蟹妹妹' },
-    { id: 20, name: '铜墙铁壁蟹' },
-    { id: 21, name: '胆小蟹' },
-    { id: 23, name: '缪斯女神蟹' },
-  ];
 
   // 随机选择6个面具
   const getRandomMasks = () => {
@@ -45,6 +20,12 @@ const MaskContainer: React.FC = () => {
   useEffect(() => {
     setRandomMasks(getRandomMasks());
   }, []);
+
+  // 处理面具点击事件
+  const handleMaskClick = (mask: MaskItem) => {
+    console.log('点击面具:', mask.name);
+    onMaskClick?.(mask);
+  };
 
   // 处理面具离开事件，翻转并替换
   const handleMaskLeave = (maskIndex: number) => {
@@ -100,6 +81,7 @@ const MaskContainer: React.FC = () => {
         <div
           className={`${styles.MaskItem} ${flippingIndexes.has(index) ? styles.flipping : ''}`}
           key={`mask-${index}`}
+          onClick={() => handleMaskClick(item)}
           onMouseLeave={() => handleMaskLeave(index)}
           onAnimationEnd={e => handleAnimationEnd(e, index)}
         >

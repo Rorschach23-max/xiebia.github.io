@@ -4,7 +4,7 @@
   height: 128px;
   display: flex;
   flex-direction: row;
-  padding: 0px 16px;
+  padding: 0 16px;
   gap: 10px 10px;
   flex-wrap: wrap;
 
@@ -15,7 +15,7 @@
     justify-content: center;
     align-items: center;
     padding: 16px;
-    gap: 0px 10px;
+    gap: 0 10px;
     font-family: Roboto;
     font-size: 16px;
     font-weight: 500;
@@ -24,14 +24,19 @@
     letter-spacing: normal;
     color: #374151;
     border-radius: 12px;
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0.001), rgba(0, 0, 0, 0.001)),
-      rgba(255, 255, 255, 0.3);
+    background: linear-gradient(0deg, rgb(0 0 0 / 0.1%), rgb(0 0 0 / 0.1%)), rgb(255 255 255 / 30%);
     backdrop-filter: blur(4px);
     transition: transform 0.6s ease;
     cursor: pointer;
 
     &:hover {
       transform: scale(1.1);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    &:active {
+      transform: scale(0.95);
+      transition: transform 0.1s ease;
     }
 
     &.flipping {
@@ -43,9 +48,11 @@
     0% {
       transform: rotateY(0deg);
     }
+
     50% {
       transform: rotateY(90deg);
     }
+
     100% {
       transform: rotateY(0deg);
     }
