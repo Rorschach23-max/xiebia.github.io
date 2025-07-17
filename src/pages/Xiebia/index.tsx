@@ -1,5 +1,5 @@
 import Header from '@/components/Header';
-import { MaskItem } from '@/constants';
+import { MaskItem, maskList } from '@/constants';
 import React, { useState } from 'react';
 import ChatSection from './components/ChatSection';
 import Introduction from './components/Introduction';
@@ -11,7 +11,7 @@ import styles from './index.less';
 
 const HomePage: React.FC = () => {
   const [showHeart, setShowHeart] = useState(false);
-  const [selectedMask, setSelectedMask] = useState<MaskItem | null>(null);
+  const [selectedMask, setSelectedMask] = useState<MaskItem | null>(maskList[0] || null);
 
   // 使用自定义hooks
   const { currentSection, pageContainerRef, scrollToSection } = usePageScroll();

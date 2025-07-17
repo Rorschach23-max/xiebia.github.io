@@ -3,12 +3,12 @@ import { useEffect, useRef } from 'react';
 export const useMaskScroll = () => {
   const maskItemsRef = useRef<HTMLDivElement>(null);
 
-  // 阻止面具区域滚动事件冒泡
+  // 完全阻止面具区域滚动事件冒泡
   useEffect(() => {
     const maskItemsContainer = maskItemsRef.current;
     if (!maskItemsContainer) return;
 
-    // 直接阻止面具区域的所有滚轮事件
+    // 完全阻止面具区域的滚轮事件冒泡
     const handleMaskScroll = (e: WheelEvent) => {
       // 完全阻止滚轮事件的冒泡和默认行为
       e.stopPropagation();
