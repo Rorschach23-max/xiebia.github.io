@@ -1,0 +1,72 @@
+.typewriterContainer {
+  padding: 15px 20px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 15px;
+  border: 1px solid #dee2e6;
+  width: 100%;
+  max-width: 1080px;
+  margin: 20px auto 0;
+
+  .typewriterText {
+    font-family: 'Courier New', monospace;
+    font-size: 16px;
+    color: #495057;
+    line-height: 1.6;
+    min-height: 24px;
+    display: flex;
+    align-items: center;
+    word-wrap: break-word;
+    word-break: break-word;
+
+    .cursor {
+      color: #e87782;
+      font-weight: bold;
+      animation: blink 1s infinite;
+      margin-left: 2px;
+      flex-shrink: 0;
+    }
+  }
+}
+
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+// 响应式设计
+@media (max-width: 768px) {
+  .typewriterContainer {
+    margin: 15px;
+    max-width: calc(100% - 30px);
+
+    .typewriterText {
+      font-size: 14px;
+    }
+  }
+}
+
+// 主题变体
+.typewriterContainer.dark {
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  border-color: #4a5568;
+
+  .typewriterText {
+    color: #e2e8f0;
+  }
+}
+
+.typewriterContainer.compact {
+  padding: 10px 15px;
+  margin: 10px auto 0;
+
+  .typewriterText {
+    font-size: 14px;
+    min-height: 20px;
+  }
+}

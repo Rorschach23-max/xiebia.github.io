@@ -14,7 +14,7 @@ const ChatSection: React.FC<ChatSectionProps> = ({ selectedMask }) => {
 
   return (
     <div className={styles.chatContent}>
-      {selectedMask ? (
+      {selectedMask && (
         <div className={styles.dialogueContainer}>
           <div className={styles.dialogueHeader}>
             <h3>{selectedMask.name}</h3>
@@ -39,11 +39,6 @@ const ChatSection: React.FC<ChatSectionProps> = ({ selectedMask }) => {
               </div>
             ))}
           </div>
-        </div>
-      ) : (
-        <div className={styles.noSelection}>
-          <p>点击左侧面具查看面具来源吧！</p>
-          <p>每个面具都有独特的故事哦~</p>
         </div>
       )}
     </div>

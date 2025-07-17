@@ -21,7 +21,6 @@ export const useChatScroll = () => {
 
     // 在document级别处理滚轮事件
     const handleDocumentScroll = (e: WheelEvent) => {
-      console.log(isMouseInChatArea(e));
       // 实时检测鼠标位置
       if (isMouseInChatArea(e)) {
         e.stopPropagation();

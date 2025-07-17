@@ -1,3 +1,4 @@
+import crabImg from '@/assets/crab.png';
 import bilibiliSvg from '@/assets/svg/bilibili.svg';
 import emailSvg from '@/assets/svg/email.svg';
 import tiktokSvg from '@/assets/svg/tiktok.svg';
@@ -13,6 +14,7 @@ const Introduction: React.FC = () => {
   return (
     <div className={styles.introduction}>
       <div className={styles.introductionContent}>
+        <img className={styles.crabImg} src={crabImg} alt="crabImg" />
         <div className={styles.avatar}>
           <img src={avatar} alt="avatar" />
         </div>

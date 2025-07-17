@@ -1,6 +1,12 @@
+import crabCursorImg0 from '@/assets/crab-cursor-0.png';
+import crabCursorImg1 from '@/assets/crab-cursor-1.png';
+import crabCursorImg2 from '@/assets/crab-cursor-2.png';
+import crabCursorImg3 from '@/assets/crab-cursor-3.png';
+import crabCursorImg4 from '@/assets/crab-cursor-4.png';
+import crabCursorImg6 from '@/assets/crab-cursor-6.png';
 import Header from '@/components/Header';
 import { MaskItem, maskList } from '@/constants';
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import ChatSection from './components/ChatSection';
 import Introduction from './components/Introduction';
 import MaskContainer from './components/MaskContainer';
@@ -12,9 +18,61 @@ import styles from './index.less';
 const HomePage: React.FC = () => {
   const [showHeart, setShowHeart] = useState(false);
   const [selectedMask, setSelectedMask] = useState<MaskItem | null>(maskList[0] || null);
+  const crabIndexRef = useRef(0); // 使用 useRef 追踪当前螃蟹图片索引
 
   // 使用自定义hooks
   const { currentSection, pageContainerRef, scrollToSection } = usePageScroll();
+
+  // 创建点击效果
+  const createClickEffect = (x: number, y: number) => {
+    const crabPatterns = [
+      crabCursorImg0,
+      crabCursorImg1,
+      crabCursorImg2,
+      crabCursorImg3,
+      crabCursorImg4,
+      crabCursorImg6,
+    ];
+    const randomOffset = (Math.random() - 0.5) * 60; // -30px 到 30px 的随机水平偏移
+
+    const crabElement = document.createElement('img');
+    crabElement.className = styles.crabEffect;
+    crabElement.src = crabPatterns[crabIndexRef.current];
+    crabElement.style.left = `${x}px`;
+    crabElement.style.top = `${y}px`;
+    crabElement.style.position = 'fixed';
+    crabElement.style.pointerEvents = 'none';
+    crabElement.style.zIndex = '9999';
+    crabElement.style.width = '32px';
+    crabElement.style.height = '32px';
+    crabElement.style.setProperty('--random-offset', `${randomOffset}px`);
+    crabElement.style.animation = `${styles.crabFloat} 2s ease-out forwards`;
+
+    document.body.appendChild(crabElement);
+
+    // 更新索引，循环到下一个图片
+    crabIndexRef.current = (crabIndexRef.current + 1) % crabPatterns.length;
+
+    // 2秒后移除元素
+    setTimeout(() => {
+      if (crabElement && crabElement.parentNode) {
+        crabElement.parentNode.removeChild(crabElement);
+      }
+    }, 2000);
+  };
+
+  // 监听全局鼠标点击事件
+  useEffect(() => {
+    const handleClick = (e: MouseEvent) => {
+      createClickEffect(e.clientX, e.clientY);
+    };
+
+    document.addEventListener('click', handleClick);
+
+    return () => {
+      document.removeEventListener('click', handleClick);
+    };
+  }, []);
 
   // 处理MaskContainer中面具点击事件
   const handleMaskContainerClick = (mask: MaskItem) => {
