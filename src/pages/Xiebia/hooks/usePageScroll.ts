@@ -40,7 +40,7 @@ export const usePageScroll = () => {
         const scrollTop = container.scrollTop;
         const sectionHeight = window.innerHeight;
         const currentIndex = Math.round(scrollTop / sectionHeight);
-        setCurrentSection(Math.max(0, Math.min(1, currentIndex)));
+        setCurrentSection(Math.max(0, Math.min(2, currentIndex))); // 现在支持3个区域 (0, 1, 2)
       }, 50); // 减少到50ms，让状态更新更及时
     };
 
@@ -54,50 +54,47 @@ export const usePageScroll = () => {
   // 键盘事件监听
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // 使用全局防抖状态，避免重复触发
       if (isTransitioning.current) return;
 
-      if (e.key === 'ArrowDown' && currentSection < 1) {
+      if (e.key === 'ArrowDown' || e.key === 'PageDown') {
         e.preventDefault();
-        scrollToSection(currentSection + 1);
-      } else if (e.key === 'ArrowUp' && currentSection > 0) {
+        if (currentSection < 2) {
+          // 最大到第3个区域
+          scrollToSection(currentSection + 1);
+        }
+      } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
         e.preventDefault();
-        scrollToSection(currentSection - 1);
+        if (currentSection > 0) {
+          scrollToSection(currentSection - 1);
+        }
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
   }, [currentSection]);
 
-  // 触摸事件监听（支持移动设备）
+  // 触摸事件监听
   useEffect(() => {
     const container = pageContainerRef.current;
     if (!container) return;
 
-    let startY = 0;
-    let startTime = 0;
-    let isTouch = false;
+    let touchStartY = 0;
+    let touchEndY = 0;
 
     const handleTouchStart = (e: TouchEvent) => {
-      // 如果正在转换中，忽略触摸事件
-      if (isTransitioning.current) return;
-
-      startY = e.touches[0].clientY;
-      startTime = Date.now();
-      isTouch = true;
+      touchStartY = e.touches[0].clientY;
     };
 
     const handleTouchEnd = (e: TouchEvent) => {
-      if (!isTouch || isTransitioning.current) return;
+      touchEndY = e.changedTouches[0].clientY;
+      const deltaY = touchStartY - touchEndY;
+      const threshold = 50; // 触摸阈值
 
-      const endY = e.changedTouches[0].clientY;
-      const deltaY = startY - endY;
-      const deltaTime = Date.now() - startTime;
-
-      // 检测快速滑动手势，降低触发阈值让操作更敏感
-      if (Math.abs(deltaY) > 30 && deltaTime < 500) {
-        if (deltaY > 0 && currentSection < 1) {
+      if (Math.abs(deltaY) > threshold && !isTransitioning.current) {
+        if (deltaY > 0 && currentSection < 2) {
           // 向上滑动，切换到下一个区域
           scrollToSection(currentSection + 1);
         } else if (deltaY < 0 && currentSection > 0) {
@@ -105,8 +102,6 @@ export const usePageScroll = () => {
           scrollToSection(currentSection - 1);
         }
       }
-
-      isTouch = false;
     };
 
     container.addEventListener('touchstart', handleTouchStart, { passive: true });
@@ -130,7 +125,7 @@ export const usePageScroll = () => {
       e.preventDefault();
 
       // 根据滚轮方向切换区域
-      if (e.deltaY > 0 && currentSection < 1) {
+      if (e.deltaY > 0 && currentSection < 2) {
         // 向下滚动，切换到下一个区域
         scrollToSection(currentSection + 1);
       } else if (e.deltaY < 0 && currentSection > 0) {

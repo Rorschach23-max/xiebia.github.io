@@ -1,3 +1,14 @@
+import {
+  componentDevelopment,
+  cssGridLayout,
+  gitWorkflow,
+  javascriptAsync,
+  performanceOptimization,
+  projectArchitecture,
+  reactHooksGuide,
+  typescriptAdvanced,
+} from '@/assets/docs';
+
 export const DEFAULT_NAME = 'xiebia';
 
 export interface ChatMessage {
@@ -10,6 +21,95 @@ export interface MaskItem {
   name: string;
   dialogue: ChatMessage[];
 }
+
+export interface DocItem {
+  id: number;
+  title: string;
+  content: string;
+  category: string;
+  createTime: string;
+  updateTime: string;
+}
+
+export interface DocCategory {
+  id: number;
+  name: string;
+  count: number;
+}
+
+export const docCategories: DocCategory[] = [
+  { id: 1, name: '技术文档', count: 3 },
+  { id: 2, name: '项目笔记', count: 2 },
+  { id: 3, name: '学习总结', count: 2 },
+  { id: 4, name: '工具使用', count: 1 },
+];
+
+export const docList: DocItem[] = [
+  {
+    id: 1,
+    title: 'React Hooks 使用指南',
+    content: reactHooksGuide,
+    category: '技术文档',
+    createTime: '2024-01-15',
+    updateTime: '2024-01-20',
+  },
+  {
+    id: 2,
+    title: 'TypeScript 进阶技巧',
+    content: typescriptAdvanced,
+    category: '技术文档',
+    createTime: '2024-01-10',
+    updateTime: '2024-01-18',
+  },
+  {
+    id: 3,
+    title: 'CSS Grid 布局详解',
+    content: cssGridLayout,
+    category: '技术文档',
+    createTime: '2024-01-05',
+    updateTime: '2024-01-12',
+  },
+  {
+    id: 4,
+    title: '项目架构设计思路',
+    content: projectArchitecture,
+    category: '项目笔记',
+    createTime: '2024-01-08',
+    updateTime: '2024-01-15',
+  },
+  {
+    id: 5,
+    title: '组件化开发实践',
+    content: componentDevelopment,
+    category: '项目笔记',
+    createTime: '2024-01-03',
+    updateTime: '2024-01-10',
+  },
+  {
+    id: 6,
+    title: 'JavaScript 异步编程',
+    content: javascriptAsync,
+    category: '学习总结',
+    createTime: '2024-01-12',
+    updateTime: '2024-01-16',
+  },
+  {
+    id: 7,
+    title: '前端性能优化指南',
+    content: performanceOptimization,
+    category: '学习总结',
+    createTime: '2024-01-14',
+    updateTime: '2024-01-19',
+  },
+  {
+    id: 8,
+    title: 'Git 工作流最佳实践',
+    content: gitWorkflow,
+    category: '工具使用',
+    createTime: '2024-01-12',
+    updateTime: '2024-01-16',
+  },
+];
 
 export const maskList: MaskItem[] = [
   {

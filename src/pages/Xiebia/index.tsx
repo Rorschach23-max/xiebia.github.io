@@ -5,9 +5,12 @@ import crabCursorImg3 from '@/assets/crab-cursor-3.png';
 import crabCursorImg4 from '@/assets/crab-cursor-4.png';
 import crabCursorImg6 from '@/assets/crab-cursor-6.png';
 import Header from '@/components/Header';
-import { MaskItem, maskList } from '@/constants';
+import { DocItem, docList, MaskItem, maskList } from '@/constants';
 import React, { useEffect, useRef, useState } from 'react';
 import ChatSection from './components/ChatSection';
+import DocCategories from './components/DocCategories';
+import DocList from './components/DocList';
+import DocViewer from './components/DocViewer';
 import Introduction from './components/Introduction';
 import MaskContainer from './components/MaskContainer';
 import MaskList from './components/MaskList';
@@ -18,6 +21,8 @@ import styles from './index.less';
 const HomePage: React.FC = () => {
   const [showHeart, setShowHeart] = useState(false);
   const [selectedMask, setSelectedMask] = useState<MaskItem | null>(maskList[0] || null);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [selectedDoc, setSelectedDoc] = useState<DocItem | null>(docList[0] || null);
   const crabIndexRef = useRef(0); // 使用 useRef 追踪当前螃蟹图片索引
 
   // 使用自定义hooks
@@ -100,6 +105,14 @@ const HomePage: React.FC = () => {
     window.open('https://www.winterlee.top', '_blank');
   };
 
+  // 处理Header中"文章"点击事件
+  const handleHeaderArticleClick = () => {
+    console.log('从Header点击文章');
+
+    // 跳转到contentThree
+    scrollToSection(2);
+  };
+
   return (
     <div>
       {/* 开发测试组件 - 可以根据需要显示/隐藏 */}
@@ -123,7 +136,11 @@ const HomePage: React.FC = () => {
       </div> */}
 
       {/* Header固定在顶部 */}
-      <Header onMaskClick={handleHeaderMaskClick} onLinkClick={handleHeaderLinkClick} />
+      <Header
+        onMaskClick={handleHeaderMaskClick}
+        onLinkClick={handleHeaderLinkClick}
+        onArticleClick={handleHeaderArticleClick}
+      />
 
       {/* 滑动指示器 */}
       <ScrollIndicator currentSection={currentSection} onSectionClick={scrollToSection} />
@@ -138,6 +155,22 @@ const HomePage: React.FC = () => {
             <MaskList selectedMask={selectedMask} onMaskSelect={setSelectedMask} />
             <div className={styles.articleAndMaskContent}>
               <ChatSection selectedMask={selectedMask} />
+            </div>
+          </div>
+        </div>
+        <div className={styles.contentThree}>
+          <div className={styles.docsAndViewer}>
+            <DocCategories
+              selectedCategory={selectedCategory}
+              onCategorySelect={setSelectedCategory}
+            />
+            <div className={styles.docsContent}>
+              <DocList
+                selectedCategory={selectedCategory}
+                selectedDoc={selectedDoc}
+                onDocSelect={setSelectedDoc}
+              />
+              <DocViewer selectedDoc={selectedDoc} />
             </div>
           </div>
         </div>

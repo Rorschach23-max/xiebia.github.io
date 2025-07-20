@@ -366,3 +366,369 @@
     opacity: 0;
   }
 }
+
+.contentThree {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #ffe8e9;
+  position: relative;
+  padding-top: 64px;
+  scroll-snap-align: start;
+
+  .docsAndViewer {
+    display: flex;
+    gap: 30px;
+    margin-top: 50px;
+    height: calc(100vh - 114px);
+    max-width: 1200px;
+    width: 100%;
+
+    // 文档分类样式
+    .docCategoriesTab {
+      width: 200px;
+      border-radius: 20px;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      padding: 20px 15px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+      .docCategoriesTabTitle {
+        border-left: 2px solid #e87782;
+        font-family: Noto Serif SC;
+        font-size: 16px;
+        font-weight: bold;
+        line-height: 22px;
+        letter-spacing: normal;
+        color: #3d3d3d;
+        span {
+          margin-left: 8px;
+        }
+      }
+
+      .docCategoriesItems {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 15px;
+
+        .categoryItem {
+          padding: 8px 12px;
+          background: #f0f0f0;
+          border-radius: 6px;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          font-family: Noto Serif SC;
+          font-size: 14px;
+          font-weight: normal;
+          line-height: 20px;
+          color: #666;
+
+          .count {
+            font-size: 12px;
+            color: #999;
+          }
+
+          &:hover {
+            background: #e87782;
+            color: white;
+            transform: translateY(-1px);
+
+            .count {
+              color: rgba(255, 255, 255, 0.8);
+            }
+          }
+
+          &.selected {
+            background: #e87782;
+            color: white;
+
+            .count {
+              color: rgba(255, 255, 255, 0.8);
+            }
+          }
+        }
+      }
+    }
+
+    .docsContent {
+      flex: 1;
+      display: flex;
+      gap: 20px;
+      height: 90%;
+
+      // 文档列表样式
+      .docListContainer {
+        width: 300px;
+        background: #ffffff;
+        border-radius: 20px;
+        padding: 20px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+
+        .docListHeader {
+          border-bottom: 1px solid #e8e8e8;
+          padding-bottom: 15px;
+
+          h3 {
+            font-family: Noto Serif SC;
+            font-size: 18px;
+            font-weight: bold;
+            color: #e87782;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            .count {
+              font-size: 14px;
+              color: #999;
+              font-weight: normal;
+            }
+          }
+        }
+
+        .docListContent {
+          flex: 1;
+          overflow-y: auto;
+          display: flex;
+          flex-direction: column;
+          padding-top: 15px;
+          gap: 8px;
+
+          // 隐藏滚动条
+          scrollbar-width: none; /* Firefox */
+          -ms-overflow-style: none; /* IE 和 Edge */
+
+          &::-webkit-scrollbar {
+            display: none; /* Chrome, Safari 和 Opera */
+          }
+
+          .docItem {
+            padding: 12px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 1px solid #e8e8e8;
+
+            .docTitle {
+              font-family: Noto Serif SC;
+              font-size: 14px;
+              font-weight: 500;
+              color: #333;
+              margin-bottom: 8px;
+              line-height: 1.4;
+            }
+
+            .docMeta {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              font-size: 12px;
+
+              .category {
+                background: #f0f0f0;
+                color: #666;
+                padding: 2px 6px;
+                border-radius: 4px;
+              }
+
+              .date {
+                color: #999;
+              }
+            }
+
+            &:hover {
+              background: #ffe8e9;
+              border-color: #e87782;
+              transform: translateY(-2px);
+              box-shadow: 0 4px 12px rgba(232, 119, 130, 0.15);
+            }
+
+            &.selected {
+              background: #ffe8e9;
+              border-color: #e87782;
+              box-shadow: 0 2px 8px rgba(232, 119, 130, 0.2);
+            }
+          }
+        }
+      }
+
+      // 文档查看器样式
+      .docViewerContainer {
+        flex: 1;
+        background: #ffffff;
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+
+        .noDocSelected {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          height: 100%;
+          color: #999;
+
+          p {
+            font-family: Noto Serif SC;
+            font-size: 16px;
+            line-height: 1.6;
+            margin: 8px 0;
+            text-align: center;
+          }
+        }
+
+        .docHeader {
+          border-bottom: 1px solid #e8e8e8;
+          padding-bottom: 20px;
+          margin-bottom: 20px;
+          flex-shrink: 0;
+
+          h2 {
+            font-family: Noto Serif SC;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin: 0 0 10px 0;
+          }
+
+          .docInfo {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+
+            .category {
+              background: #e87782;
+              color: white;
+              padding: 4px 8px;
+              border-radius: 4px;
+              font-size: 12px;
+            }
+
+            .date {
+              color: #999;
+              font-size: 14px;
+            }
+          }
+        }
+
+        .docContent {
+          flex: 1;
+          overflow-y: auto;
+          line-height: 1.6;
+
+          // 自定义滚动条样式
+          scrollbar-width: thin;
+          scrollbar-color: #e87782 #ffffff;
+
+          &::-webkit-scrollbar {
+            width: 6px;
+          }
+
+          &::-webkit-scrollbar-track {
+            background: #ffffff;
+            border-radius: 3px;
+          }
+
+          &::-webkit-scrollbar-thumb {
+            background: #e87782;
+            border-radius: 3px;
+
+            &:hover {
+              background: #c98c92;
+            }
+          }
+
+          // Markdown 内容样式
+          h1,
+          h2,
+          h3,
+          h4,
+          h5,
+          h6 {
+            font-family: Noto Serif SC;
+            color: #333;
+            margin: 20px 0 10px 0;
+            line-height: 1.4;
+          }
+
+          h1 {
+            font-size: 28px;
+            border-bottom: 2px solid #e87782;
+            padding-bottom: 10px;
+          }
+
+          h2 {
+            font-size: 24px;
+            color: #e87782;
+          }
+
+          h3 {
+            font-size: 20px;
+          }
+
+          p {
+            margin: 10px 0;
+            color: #666;
+            font-size: 14px;
+          }
+
+          code {
+            background: #f5f5f5;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 13px;
+            color: #d63384;
+          }
+
+          pre {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 15px 0;
+            border-left: 4px solid #e87782;
+
+            code {
+              background: none;
+              padding: 0;
+              color: inherit;
+            }
+          }
+
+          ul,
+          ol {
+            padding-left: 20px;
+            margin: 10px 0;
+
+            li {
+              margin: 5px 0;
+              color: #666;
+            }
+          }
+
+          blockquote {
+            border-left: 4px solid #e87782;
+            padding: 10px 15px;
+            margin: 15px 0;
+            background: #ffe8e9;
+            color: #666;
+            font-style: italic;
+          }
+        }
+      }
+    }
+  }
+}

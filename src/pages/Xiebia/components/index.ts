@@ -1,4 +1,7 @@
 export { default as ChatSection } from './ChatSection';
+export { default as DocCategories } from './DocCategories';
+export { default as DocList } from './DocList';
+export { default as DocViewer } from './DocViewer';
 export { default as Introduction } from './Introduction';
 export { default as MaskContainer } from './MaskContainer';
 export { default as MaskList } from './MaskList';

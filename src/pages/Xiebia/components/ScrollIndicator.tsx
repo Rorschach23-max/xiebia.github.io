@@ -17,6 +17,10 @@ const ScrollIndicator: React.FC<ScrollIndicatorProps> = ({ currentSection, onSec
         className={`${styles.indicator} ${currentSection === 1 ? styles.active : ''}`}
         onClick={() => onSectionClick(1)}
       />
+      <div
+        className={`${styles.indicator} ${currentSection === 2 ? styles.active : ''}`}
+        onClick={() => onSectionClick(2)}
+      />
     </div>
   );
 };

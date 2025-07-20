@@ -4,9 +4,10 @@ import styles from './index.less';
 interface HeaderProps {
   onMaskClick?: () => void;
   onLinkClick?: () => void;
+  onArticleClick?: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ onMaskClick, onLinkClick }) => {
+const Header: React.FC<HeaderProps> = ({ onMaskClick, onLinkClick, onArticleClick }) => {
   return (
     <div className={styles.navHeader}>
       <div className={styles.navHeaderLeft}>XieBia</div>
@@ -17,7 +18,9 @@ const Header: React.FC<HeaderProps> = ({ onMaskClick, onLinkClick }) => {
         <div className={styles.headerItem} onClick={onLinkClick}>
           友情链接
         </div>
-        <div className={styles.headerItem}>文章</div>
+        <div className={styles.headerItem} onClick={onArticleClick}>
+          文档
+        </div>
       </div>
     </div>
   );
