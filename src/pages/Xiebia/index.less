@@ -385,6 +385,8 @@
     height: calc(100vh - 114px);
     max-width: 1200px;
     width: 100%;
+    padding: 0 20px; // 增加左右内边距
+    box-sizing: border-box; // 确保padding包含在width内
 
     // 文档分类样式
     .docCategoriesTab {
@@ -564,6 +566,7 @@
       // 文档查看器样式
       .docViewerContainer {
         flex: 1;
+        max-width: 650px;
         background: #ffffff;
         border-radius: 20px;
         padding: 30px;
@@ -628,6 +631,31 @@
           overflow-y: auto;
           line-height: 1.6;
 
+          // 加载和错误状态样式
+          .loading,
+          .error {
+            text-align: center;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+
+            p {
+              margin: 5px 0;
+            }
+          }
+
+          .loading {
+            background: #f0f8ff;
+            color: #666;
+            border: 1px solid #e0e8f0;
+          }
+
+          .error {
+            background: #fff2f2;
+            color: #d63384;
+            border: 1px solid #f8d7da;
+          }
+
           // 自定义滚动条样式
           scrollbar-width: thin;
           scrollbar-color: #e87782 #ffffff;
@@ -661,6 +689,7 @@
             color: #333;
             margin: 20px 0 10px 0;
             line-height: 1.4;
+            word-wrap: break-word; // 防止标题过长溢出
           }
 
           h1 {
@@ -682,6 +711,9 @@
             margin: 10px 0;
             color: #666;
             font-size: 14px;
+            word-wrap: break-word; // 防止长单词溢出
+            overflow-wrap: break-word; // 更好的换行支持
+            line-height: 1.6; // 提高可读性
           }
 
           code {
@@ -691,6 +723,8 @@
             font-family: 'Consolas', 'Monaco', monospace;
             font-size: 13px;
             color: #d63384;
+            word-break: break-all; // 允许在任意字符处换行
+            overflow-wrap: break-word; // 长单词换行
           }
 
           pre {
@@ -700,6 +734,10 @@
             overflow-x: auto;
             margin: 15px 0;
             border-left: 4px solid #e87782;
+            max-width: 100%; // 防止超出容器
+            box-sizing: border-box; // 包含padding在宽度内
+            white-space: pre; // 保持代码格式
+            word-wrap: normal; // 使用滚动而非换行
 
             code {
               background: none;
@@ -716,6 +754,8 @@
             li {
               margin: 5px 0;
               color: #666;
+              word-wrap: break-word; // 防止长单词溢出
+              overflow-wrap: break-word; // 更好的换行支持
             }
           }
 
@@ -726,6 +766,249 @@
             background: #ffe8e9;
             color: #666;
             font-style: italic;
+          }
+
+          // 表格基础样式
+          table {
+            width: 100%;
+            max-width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 14px;
+            overflow-x: auto;
+            display: block;
+            white-space: nowrap;
+
+            th,
+            td {
+              border: 1px solid #e8e8e8;
+              padding: 8px 12px;
+              text-align: left;
+            }
+
+            th {
+              background: #f8f9fa;
+              font-weight: bold;
+              color: #333;
+            }
+
+            tbody tr:nth-child(even) {
+              background: #f9f9f9;
+            }
+
+            tbody tr:hover {
+              background: #f5f5f5;
+            }
+          }
+
+          // 图片响应式样式
+          img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+            margin: 10px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+          }
+        }
+      }
+    }
+
+    // 响应式布局 - 平板设备
+    @media screen and (max-width: 1024px) {
+      .docsAndViewer {
+        gap: 20px;
+        padding: 0 15px;
+
+        .docCategoriesTab {
+          width: 180px;
+          padding: 15px 10px;
+        }
+
+        .docsContent {
+          gap: 15px;
+
+          .docListContainer {
+            width: 250px;
+            padding: 15px;
+          }
+
+          .docViewerContainer {
+            padding: 20px;
+          }
+        }
+      }
+    }
+
+    // 响应式布局 - 小屏设备
+    @media screen and (max-width: 768px) {
+      .docsAndViewer {
+        flex-direction: column;
+        gap: 15px;
+        padding: 0 10px;
+        height: auto;
+        margin-top: 30px;
+
+        .docCategoriesTab {
+          width: 100%;
+          margin-bottom: 0;
+
+          .docCategoriesItems {
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 8px;
+
+            .categoryItem {
+              flex: none;
+              white-space: nowrap;
+            }
+          }
+        }
+
+        .docsContent {
+          flex-direction: column;
+          gap: 15px;
+          height: auto;
+
+          .docListContainer {
+            width: 100%;
+            max-height: 300px;
+
+            .docListContent {
+              max-height: 200px;
+            }
+          }
+
+          .docViewerContainer {
+            width: 100%;
+            min-height: 400px;
+            padding: 20px 15px;
+
+            .docContent {
+              // 防止代码块横向溢出
+              pre {
+                overflow-x: auto;
+                white-space: pre;
+                word-wrap: normal;
+              }
+
+              // 防止长单词溢出
+              p,
+              li {
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+              }
+
+              // 防止表格溢出
+              table {
+                width: 100%;
+                max-width: 100%;
+                overflow-x: auto;
+                display: block;
+                white-space: nowrap;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    // 响应式布局 - 超小屏设备
+    @media screen and (max-width: 480px) {
+      .docsAndViewer {
+        padding: 0 5px;
+        gap: 10px;
+
+        .docCategoriesTab {
+          padding: 15px 10px;
+          border-radius: 15px;
+
+          .docCategoriesTabTitle {
+            font-size: 14px;
+          }
+
+          .docCategoriesItems {
+            .categoryItem {
+              padding: 6px 8px;
+              font-size: 12px;
+            }
+          }
+        }
+
+        .docsContent {
+          gap: 10px;
+
+          .docListContainer {
+            padding: 15px 10px;
+            border-radius: 15px;
+            max-height: 250px;
+
+            .docListHeader {
+              h3 {
+                font-size: 16px;
+              }
+            }
+
+            .docListContent {
+              .docItem {
+                padding: 10px 12px;
+
+                .docTitle {
+                  font-size: 14px;
+                }
+
+                .docMeta {
+                  font-size: 11px;
+                }
+              }
+            }
+          }
+
+          .docViewerContainer {
+            padding: 15px 10px;
+            border-radius: 15px;
+
+            .docHeader {
+              h2 {
+                font-size: 20px;
+              }
+
+              .docInfo {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+              }
+            }
+
+            .docContent {
+              font-size: 14px;
+              line-height: 1.5;
+
+              h1 {
+                font-size: 22px;
+              }
+              h2 {
+                font-size: 20px;
+              }
+              h3 {
+                font-size: 18px;
+              }
+              h4 {
+                font-size: 16px;
+              }
+
+              // 进一步优化移动端代码显示
+              pre,
+              code {
+                font-size: 12px;
+                overflow-x: auto;
+              }
+
+              // 优化移动端图片显示
+              img {
+                max-width: 100%;
+                height: auto;
+              }
+            }
           }
         }
       }

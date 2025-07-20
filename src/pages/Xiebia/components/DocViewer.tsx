@@ -1,4 +1,5 @@
 import { DocItem } from '@/constants';
+import { useMarkdownLoader } from '@/hooks/useMarkdownLoader';
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
@@ -12,6 +13,16 @@ interface DocViewerProps {
 
 const DocViewer: React.FC<DocViewerProps> = ({ selectedDoc }) => {
   const { docViewerRef } = useDocViewerScroll();
+
+  // 动态加载Markdown文件
+  const {
+    content: markdownContent,
+    loading,
+    error,
+  } = useMarkdownLoader(selectedDoc?.filename || null);
+
+  // 确定使用的内容：优先使用动态加载的内容，其次使用静态内容
+  const displayContent = markdownContent || selectedDoc?.content || '';
 
   if (!selectedDoc) {
     return (
@@ -34,6 +45,17 @@ const DocViewer: React.FC<DocViewerProps> = ({ selectedDoc }) => {
         </div>
       </div>
       <div className={styles.docContent} ref={docViewerRef}>
+        {loading ? (
+          <div className={styles.loading}>
+            <p>加载中...</p>
+          </div>
+        ) : error ? (
+          <div className={styles.error}>
+            <p>加载失败: {error}</p>
+            <p>尝试显示备用内容...</p>
+          </div>
+        ) : null}
+
         <ReactMarkdown
           components={{
             code({ inline, className, children, ...props }: any) {
@@ -50,7 +72,7 @@ const DocViewer: React.FC<DocViewerProps> = ({ selectedDoc }) => {
             },
           }}
         >
-          {selectedDoc.content}
+          {displayContent}
         </ReactMarkdown>
       </div>
     </div>

@@ -1,13 +1,4 @@
-import {
-  componentDevelopment,
-  cssGridLayout,
-  gitWorkflow,
-  javascriptAsync,
-  performanceOptimization,
-  projectArchitecture,
-  reactHooksGuide,
-  typescriptAdvanced,
-} from '@/assets/docs';
+import { componentDevelopment, projectArchitecture } from '@/assets/docs';
 
 export const DEFAULT_NAME = 'xiebia';
 
@@ -25,7 +16,8 @@ export interface MaskItem {
 export interface DocItem {
   id: number;
   title: string;
-  content: string;
+  content?: string; // 保留兼容性，可选
+  filename?: string; // 新增：Markdown文件名
   category: string;
   createTime: string;
   updateTime: string;
@@ -38,37 +30,12 @@ export interface DocCategory {
 }
 
 export const docCategories: DocCategory[] = [
-  { id: 1, name: '技术文档', count: 3 },
   { id: 2, name: '项目笔记', count: 2 },
-  { id: 3, name: '学习总结', count: 2 },
-  { id: 4, name: '工具使用', count: 1 },
+  { id: 1, name: '技术文档', count: 2 },
+  { id: 3, name: '页面美化', count: 2 }, // 增加了螃蟹点击效果文档
 ];
 
 export const docList: DocItem[] = [
-  {
-    id: 1,
-    title: 'React Hooks 使用指南',
-    content: reactHooksGuide,
-    category: '技术文档',
-    createTime: '2024-01-15',
-    updateTime: '2024-01-20',
-  },
-  {
-    id: 2,
-    title: 'TypeScript 进阶技巧',
-    content: typescriptAdvanced,
-    category: '技术文档',
-    createTime: '2024-01-10',
-    updateTime: '2024-01-18',
-  },
-  {
-    id: 3,
-    title: 'CSS Grid 布局详解',
-    content: cssGridLayout,
-    category: '技术文档',
-    createTime: '2024-01-05',
-    updateTime: '2024-01-12',
-  },
   {
     id: 4,
     title: '项目架构设计思路',
@@ -86,28 +53,36 @@ export const docList: DocItem[] = [
     updateTime: '2024-01-10',
   },
   {
-    id: 6,
-    title: 'JavaScript 异步编程',
-    content: javascriptAsync,
-    category: '学习总结',
-    createTime: '2024-01-12',
-    updateTime: '2024-01-16',
+    id: 9,
+    title: '页面滑动交互的实现',
+    filename: '页面滑动交互的实现.md', // 使用动态加载
+    category: '技术文档',
+    createTime: '2024-01-22',
+    updateTime: '2024-01-22',
   },
   {
-    id: 7,
-    title: '前端性能优化指南',
-    content: performanceOptimization,
-    category: '学习总结',
-    createTime: '2024-01-14',
-    updateTime: '2024-01-19',
+    id: 11,
+    title: 'HeartCanvas 3D心形绘制实现详解',
+    filename: 'heart-canvas-implementation.md', // 🆕 3D心形技术文档
+    category: '技术文档',
+    createTime: '2024-01-22',
+    updateTime: '2024-01-22',
   },
   {
-    id: 8,
-    title: 'Git 工作流最佳实践',
-    content: gitWorkflow,
-    category: '工具使用',
-    createTime: '2024-01-12',
-    updateTime: '2024-01-16',
+    id: 10,
+    title: '滚动条自定义与隐藏实现',
+    filename: 'custom-scrollbar-implementation.md', // 🆕 新文档
+    category: '页面美化',
+    createTime: '2024-01-22',
+    updateTime: '2024-01-22',
+  },
+  {
+    id: 12,
+    title: '螃蟹点击效果实现详解',
+    filename: 'crab-click-effect-implementation.md', // 🆕 螃蟹点击特效文档
+    category: '页面美化',
+    createTime: '2024-01-22',
+    updateTime: '2024-01-22',
   },
 ];
 
