@@ -441,14 +441,12 @@ const HeartCanvas: React.FC<HeartCanvasProps> = props => {
       style={{
         display: 'flex',
         justifyContent: 'center',
-        padding: '20px',
         ...divProps.style,
       }}
     >
       <canvas
         ref={canvasRef}
         style={{
-          border: '1px solid #eee',
           borderRadius: '8px',
           boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
         }}

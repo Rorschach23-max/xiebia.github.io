@@ -5,7 +5,9 @@ import crabCursorImg3 from '@/assets/crab-cursor-3.png';
 import crabCursorImg4 from '@/assets/crab-cursor-4.png';
 import crabCursorImg6 from '@/assets/crab-cursor-6.png';
 import Header from '@/components/Header';
+import HeartCanvas from '@/components/HeartScene';
 import { DocItem, docList, MaskItem, maskList } from '@/constants';
+import { Modal } from 'antd';
 import React, { useEffect, useRef, useState } from 'react';
 import ChatSection from './components/ChatSection';
 import DocCategories from './components/DocCategories';
@@ -23,7 +25,15 @@ const HomePage: React.FC = () => {
   const [selectedMask, setSelectedMask] = useState<MaskItem | null>(maskList[0] || null);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedDoc, setSelectedDoc] = useState<DocItem | null>(docList[0] || null);
+  const [heartModalVisible, setHeartModalVisible] = useState(false);
   const crabIndexRef = useRef(0); // 使用 useRef 追踪当前螃蟹图片索引
+
+  // 键盘输入追踪
+  const keySequenceRef = useRef('');
+  const keySequenceTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  // 触发词列表
+  const triggerWords = ['winter', 'xiebia', '656385'];
 
   // 使用自定义hooks
   const { currentSection, pageContainerRef, scrollToSection } = usePageScroll();
@@ -65,6 +75,74 @@ const HomePage: React.FC = () => {
       }
     }, 2000);
   };
+
+  // 检查输入序列是否包含触发词
+  const checkTriggerWords = (sequence: string) => {
+    const lowerSequence = sequence.toLowerCase();
+    return triggerWords.some(word => lowerSequence.includes(word.toLowerCase()));
+  };
+
+  // 键盘事件监听器
+  useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      // 如果当前焦点在输入框或文本域，不处理
+      const activeElement = document.activeElement;
+      if (
+        activeElement &&
+        (activeElement.tagName === 'INPUT' ||
+          activeElement.tagName === 'TEXTAREA' ||
+          activeElement.getAttribute('contenteditable') === 'true')
+      ) {
+        return;
+      }
+
+      // 只处理字母、数字和中文字符
+      if (e.key.match(/^[\w\u4e00-\u9fa5]$/)) {
+        keySequenceRef.current += e.key.toLowerCase();
+
+        // 限制序列长度，避免无限增长
+        if (keySequenceRef.current.length > 20) {
+          keySequenceRef.current = keySequenceRef.current.slice(-20);
+        }
+
+        // 检查是否包含触发词
+        if (checkTriggerWords(keySequenceRef.current)) {
+          console.log('检测到触发词，显示心形动画！');
+          setHeartModalVisible(true);
+          keySequenceRef.current = ''; // 重置序列
+        }
+
+        // 清除之前的定时器
+        if (keySequenceTimerRef.current) {
+          clearTimeout(keySequenceTimerRef.current);
+        }
+
+        // 设置新的定时器，2秒后清空序列
+        keySequenceTimerRef.current = setTimeout(() => {
+          keySequenceRef.current = '';
+        }, 2000);
+      }
+    };
+
+    document.addEventListener('keypress', handleKeyPress);
+
+    return () => {
+      document.removeEventListener('keypress', handleKeyPress);
+      if (keySequenceTimerRef.current) {
+        clearTimeout(keySequenceTimerRef.current);
+      }
+    };
+  }, []);
+
+  // 显示使用提示
+  useEffect(() => {
+    const showTip = () => {};
+
+    // 页面加载3秒后显示提示
+    const timer = setTimeout(showTip, 3000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   // 监听全局鼠标点击事件
   useEffect(() => {
@@ -113,28 +191,13 @@ const HomePage: React.FC = () => {
     scrollToSection(2);
   };
 
+  // 关闭心形弹窗
+  const handleHeartModalClose = () => {
+    setHeartModalVisible(false);
+  };
+
   return (
     <div>
-      {/* 开发测试组件 - 可以根据需要显示/隐藏 */}
-      {/* <h2>复现一下</h2>
-      <div style={{ marginBottom: '20px' }}>
-        <Button
-          type="primary"
-          style={{ margin: '10px' }}
-          onClick={() => setShowHeart(!showHeart)}
-        >
-          {showHeart ? '隐藏心形' : '显示心形'}
-        </Button>
-      </div>
-      
-      <HeartCanvas 
-        style={{ display: showHeart ? 'flex' : 'none' }}
-        isVisible={showHeart}
-      />
-      <div style={{ marginTop: '30px' }}>
-        <InputModal />
-      </div> */}
-
       {/* Header固定在顶部 */}
       <Header
         onMaskClick={handleHeaderMaskClick}
@@ -175,6 +238,41 @@ const HomePage: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* 心形Canvas弹窗 - 条件渲染 */}
+      {heartModalVisible && (
+        <Modal
+          title=""
+          open={heartModalVisible}
+          onCancel={handleHeartModalClose}
+          footer={null}
+          centered
+          maskClosable={true}
+          closable={false}
+          bodyStyle={{
+            padding: '0px',
+            background: 'transparent',
+          }}
+          style={{
+            padding: 0,
+          }}
+          styles={{
+            content: {
+              padding: 0,
+            },
+            body: {
+              padding: 0,
+            },
+            header: {
+              padding: 0,
+              border: 'none',
+              background: 'transparent',
+            },
+          }}
+        >
+          <HeartCanvas isVisible={true} />
+        </Modal>
+      )}
     </div>
   );
 };
