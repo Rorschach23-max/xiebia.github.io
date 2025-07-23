@@ -32,4 +32,6 @@ export default defineConfig({
     // 指向 public 目录下的自定义图标
     '/icons/favicon.ico',
   ],
+  // 🔧 修复esbuild helper冲突问题
+  esbuildMinifyIIFE: true,
 });
