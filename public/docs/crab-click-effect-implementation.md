@@ -2,7 +2,7 @@
 
 ## 🦀 概述
 
-螃蟹点击效果是项目中一个富有创意的交互特效，用户在页面任意位置点击时，会在鼠标位置生成一个可爱的螃蟹图标，并伴随着浮动上升的动画效果。这个特效为页面增添了生动有趣的交互体验。
+螃蟹点击效果是 `xiebia.top` 中一个富有创意的交互特效，蟹老师在页面任意位置点击时，会在鼠标位置生成一个可爱的螃蟹图标，并伴随着浮动上升的动画效果。这个特效为页面增添了生动有趣的交互体验。
 
 ## 🎯 效果展示
 
@@ -327,52 +327,6 @@ crabElement.style.pointerEvents = 'none';
 - 多个螃蟹同时浮动，形成丰富的视觉层次
 - 每个动画独立进行，不会互相干扰
 
-## 🔧 扩展可能性
-
-### 1. 音效增强
-
-```javascript
-// 添加点击音效
-const playClickSound = () => {
-  const audio = new Audio('/sounds/crab-click.mp3');
-  audio.volume = 0.3;
-  audio.play().catch(e => console.log('音效播放失败:', e));
-};
-```
-
-### 2. 触摸设备适配
-
-```javascript
-// 支持触摸事件
-useEffect(() => {
-  const handleTouch = (e: TouchEvent) => {
-    const touch = e.touches[0] || e.changedTouches[0];
-    createClickEffect(touch.clientX, touch.clientY);
-  };
-
-  document.addEventListener('touchend', handleTouch);
-  return () => document.removeEventListener('touchend', handleTouch);
-}, []);
-```
-
-### 3. 主题变化
-
-```javascript
-// 节日主题螃蟹
-const getSeasonalCrabs = () => {
-  const season = getCurrentSeason();
-  return season === 'christmas' ? christmasCrabs : normalCrabs;
-};
-```
-
-### 4. 个性化设置
-
-```javascript
-// 用户可控制的效果开关
-const [effectEnabled, setEffectEnabled] = useState(true);
-const [effectIntensity, setEffectIntensity] = useState(1.0);
-```
-
 ## 💡 实现技巧总结
 
 ### 1. DOM 操作技巧
@@ -398,16 +352,3 @@ const [effectIntensity, setEffectIntensity] = useState(1.0);
 - 固定的动画时长保证体验一致性
 - 随机偏移增加趣味性
 - 自动清理确保性能稳定
-
-## 🎊 总结
-
-螃蟹点击效果是一个精心设计的交互特效，它巧妙地结合了：
-
-- **技术实现**：React + TypeScript + CSS 动画的完美融合
-- **视觉设计**：6 种造型 + 流畅动画 + 随机变化
-- **性能优化**：内存管理 + GPU 加速 + 事件优化
-- **用户体验**：即时反馈 + 视觉趣味 + 自然消失
-
-这个看似简单的效果，实际上体现了前端开发在交互设计、性能优化和用户体验方面的综合考量。它不仅为页面增添了生动的交互乐趣，更展现了技术与创意结合的魅力。
-
-通过螃蟹点击效果，用户在浏览页面时会不自觉地多点击几次，只为了看到不同造型的螃蟹和它们可爱的浮动动画。这正是优秀交互设计的目标：让技术服务于情感，让功能带来愉悦。🦀✨

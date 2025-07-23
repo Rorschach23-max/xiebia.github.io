@@ -31,6 +31,11 @@
   background: linear-gradient(1deg, #ffe8e9 24%, #fdd8e6 57%, #fdd7e6 66%, #ffdbe9 89%);
   scroll-snap-align: start;
   position: relative;
+
+  // 让contentOne的内容变大10%
+  > * {
+    transform: scale(1.1);
+  }
 }
 
 .contentTwo {
@@ -47,36 +52,36 @@
 
   .articleAndMask {
     display: flex;
-    gap: 30px;
-    margin-top: 100px;
+    gap: 33px; // 30px * 1.1
+    margin-top: 110px; // 100px * 1.1
     div.tab {
       display: flex;
       flex-direction: column;
       .xiebiaMaskTab {
-        width: 250px;
+        width: 275px; // 250px * 1.1
         // height: 250px;
-        border-radius: 20px;
+        border-radius: 22px; // 20px * 1.1
         background: #ffffff;
         display: flex;
         flex-direction: column;
-        padding: 20px 15px;
+        padding: 22px 17px; // 20px * 1.1, 15px * 1.1
         .xiebiaMaskTabTitle {
           border-left: 2px solid #e87782;
           font-family: Noto Serif SC;
-          font-size: 16px;
+          font-size: 18px; // 16px * 1.1 ≈ 18px
           font-weight: bold;
-          line-height: 22px;
+          line-height: 24px; // 22px * 1.1 ≈ 24px
           letter-spacing: normal;
           color: #3d3d3d;
           span {
-            margin-left: 8px;
+            margin-left: 9px; // 8px * 1.1 ≈ 9px
           }
         }
         .xiebiaMaskItems {
           display: flex;
           flex-wrap: wrap;
-          gap: 8px;
-          margin-top: 15px;
+          gap: 9px; // 8px * 1.1 ≈ 9px
+          margin-top: 17px; // 15px * 1.1 ≈ 17px
           // max-height: 180px;
           overflow-y: auto;
 
@@ -89,19 +94,19 @@
           }
 
           .maskItem {
-            height: 28px;
-            padding: 4px 8px;
+            height: 31px; // 28px * 1.1 ≈ 31px
+            padding: 5px 9px; // 4px * 1.1 ≈ 5px, 8px * 1.1 ≈ 9px
             background: #ffe8e9;
-            border-radius: 4px;
+            border-radius: 5px; // 4px * 1.1 ≈ 5px
             cursor: pointer;
             transition: all 0.2s ease;
             display: flex;
             align-items: center;
             white-space: nowrap;
             font-family: Noto Serif SC;
-            font-size: 14px;
+            font-size: 15px; // 14px * 1.1 ≈ 15px
             font-weight: normal;
-            line-height: 22px;
+            line-height: 24px; // 22px * 1.1 ≈ 24px
             text-align: center;
             letter-spacing: normal;
             color: #e87782;
@@ -123,33 +128,33 @@
           }
         }
         .moreMask {
-          margin-top: 20px;
-          padding: 15px;
+          margin-top: 22px; // 20px * 1.1 ≈ 22px
+          padding: 17px; // 15px * 1.1 ≈ 17px
           background: #f8f9fa;
-          border-radius: 10px;
+          border-radius: 11px; // 10px * 1.1 ≈ 11px
           border: 1px solid #e9ecef;
 
           .moreMaskTitle {
             border-left: 2px solid #e87782;
             font-family: Noto Serif SC;
-            font-size: 14px;
+            font-size: 15px; // 14px * 1.1 ≈ 15px
             font-weight: bold;
-            line-height: 20px;
+            line-height: 22px; // 20px * 1.1 ≈ 22px
             letter-spacing: normal;
             color: #6c757d;
             span {
-              margin-left: 8px;
+              margin-left: 9px; // 8px * 1.1 ≈ 9px
             }
           }
         }
       }
     }
     .articleAndMaskContent {
-      width: 800px;
-      min-height: 400px;
+      width: 880px; // 800px * 1.1
+      min-height: 440px; // 400px * 1.1
       background: #ffffff;
-      border-radius: 20px;
-      padding: 20px;
+      border-radius: 22px; // 20px * 1.1 ≈ 22px
+      padding: 22px; // 20px * 1.1 ≈ 22px
       display: flex;
       .chatContent {
         width: 100%;
@@ -163,13 +168,13 @@
 
           .dialogueHeader {
             border-bottom: 1px solid #e8778236;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
+            padding-bottom: 11px; // 10px * 1.1 ≈ 11px
+            margin-bottom: 22px; // 20px * 1.1 ≈ 22px
             flex-shrink: 0;
 
             h3 {
               font-family: Noto Serif SC;
-              font-size: 20px;
+              font-size: 22px; // 20px * 1.1 ≈ 22px
               font-weight: bold;
               color: #e87782;
               margin: 0;
@@ -178,12 +183,12 @@
 
           .chatContainer {
             flex: 1;
-            max-height: 450px; // 设置最大高度
+            max-height: 495px; // 450px * 1.1 ≈ 495px
             overflow-y: auto;
-            padding: 10px 5px;
+            padding: 11px 6px; // 10px * 1.1 ≈ 11px, 5px * 1.1 ≈ 6px
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 17px; // 15px * 1.1 ≈ 17px
 
             // 自定义滚动条样式
             scrollbar-width: thin; /* Firefox */
@@ -211,14 +216,14 @@
               display: flex;
               width: 100%;
               align-items: flex-end;
-              gap: 10px;
+              gap: 11px; // 10px * 1.1 ≈ 11px
 
               .messageContent {
                 max-width: 65%;
-                padding: 14px 18px;
-                border-radius: 20px;
+                padding: 15px 20px; // 14px * 1.1 ≈ 15px, 18px * 1.1 ≈ 20px
+                border-radius: 22px; // 20px * 1.1 ≈ 22px
                 font-family: Noto Serif SC;
-                font-size: 15px;
+                font-size: 17px; // 15px * 1.1 ≈ 17px
                 line-height: 1.6;
                 word-wrap: break-word;
                 animation: messageSlideIn 0.6s ease-out both;
@@ -227,8 +232,8 @@
               }
 
               .messageAvatar {
-                width: 40px;
-                height: 40px;
+                width: 44px; // 40px * 1.1 ≈ 44px
+                height: 44px; // 40px * 1.1 ≈ 44px
                 border-radius: 50%;
                 object-fit: cover;
                 border: 2px solid #fff;
@@ -247,7 +252,7 @@
                 .messageContent {
                   background: linear-gradient(135deg, #ffc0cb 0%, #ffb6c1 50%, #ffa0b4 100%);
                   color: #fff;
-                  border-bottom-right-radius: 8px;
+                  border-bottom-right-radius: 9px; // 8px * 1.1 ≈ 9px
                   order: 1;
                 }
 
@@ -263,7 +268,7 @@
                 .messageContent {
                   background: linear-gradient(135deg, #f8bbd9 0%, #f4a6cd 50%, #f3a3ca 100%);
                   color: #fff;
-                  border-bottom-left-radius: 8px;
+                  border-bottom-left-radius: 9px; // 8px * 1.1 ≈ 9px
                   order: 2;
                 }
 
@@ -299,9 +304,9 @@
 
     p {
       font-family: Noto Serif SC;
-      font-size: 16px;
+      font-size: 18px; // 16px * 1.1 ≈ 18px
       line-height: 1.6;
-      margin: 8px 0;
+      margin: 9px 0; // 8px * 1.1 ≈ 9px
       text-align: center;
     }
   }
@@ -705,6 +710,23 @@
 
           h3 {
             font-size: 20px;
+          }
+
+          // Markdown 图片样式
+          .markdownImage {
+            max-width: 100%;
+            height: auto;
+            margin: 15px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e0e0e0;
+            display: block;
+
+            &:hover {
+              box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+              transform: translateY(-2px);
+              transition: all 0.3s ease;
+            }
           }
 
           p {

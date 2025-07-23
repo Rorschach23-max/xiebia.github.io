@@ -1,4 +1,4 @@
-import { componentDevelopment, projectArchitecture } from '@/assets/docs';
+import { projectArchitecture } from '@/assets/docs';
 
 export const DEFAULT_NAME = 'xiebia';
 
@@ -38,51 +38,51 @@ export const docCategories: DocCategory[] = [
 export const docList: DocItem[] = [
   {
     id: 4,
-    title: '项目架构设计思路',
+    title: '项目架构',
     content: projectArchitecture,
     category: '项目笔记',
-    createTime: '2024-01-08',
-    updateTime: '2024-01-15',
+    createTime: '2025-06-09',
+    updateTime: '2025-07-22',
   },
   {
-    id: 5,
-    title: '组件化开发实践',
-    content: componentDevelopment,
+    id: 65,
+    title: '建站过程',
+    filename: '建站过程.md', // 🔧 修复：使用filename字段进行动态加载
     category: '项目笔记',
-    createTime: '2024-01-03',
-    updateTime: '2024-01-10',
+    createTime: '2025-07-21',
+    updateTime: '2025-07-23',
   },
   {
     id: 9,
     title: '页面滑动交互的实现',
     filename: '页面滑动交互的实现.md', // 使用动态加载
     category: '技术文档',
-    createTime: '2024-01-22',
-    updateTime: '2024-01-22',
+    createTime: '2025-07-19',
+    updateTime: '2025-07-20',
   },
   {
     id: 11,
     title: 'HeartCanvas 3D心形绘制实现详解',
     filename: 'heart-canvas-implementation.md', // 🆕 3D心形技术文档
     category: '技术文档',
-    createTime: '2024-01-22',
-    updateTime: '2024-01-22',
+    createTime: '2025-06-11',
+    updateTime: '2025-06-14',
   },
   {
     id: 10,
     title: '滚动条自定义与隐藏实现',
     filename: 'custom-scrollbar-implementation.md', // 🆕 新文档
     category: '页面美化',
-    createTime: '2024-01-22',
-    updateTime: '2024-01-22',
+    createTime: '2025-07-13',
+    updateTime: '2025-07-17',
   },
   {
     id: 12,
     title: '螃蟹点击效果实现详解',
     filename: 'crab-click-effect-implementation.md', // 🆕 螃蟹点击特效文档
     category: '页面美化',
-    createTime: '2024-01-22',
-    updateTime: '2024-01-22',
+    createTime: '2025-07-18',
+    updateTime: '2025-07-20',
   },
 ];
 

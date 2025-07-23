@@ -2,7 +2,7 @@
 
 ## 🎯 概述
 
-本项目根据不同区域的功能需求，实现了两套滚动条策略：
+`xiebia.top` 根据不同区域的功能需求，实现了两套滚动条策略：
 
 - **隐藏滚动条**：保持界面简洁，不干扰用户体验
 - **自定义滚动条**：提供视觉反馈，增强交互体验
@@ -296,54 +296,3 @@ scrollbar-color: #e87782 #ffffff; /* thumb-color track-color */
 
 - **移动端适配**：在触摸设备上，隐藏的滚动条不影响滑动操作
 - **高分辨率屏幕**：滚动条尺寸在各种屏幕密度下都合适
-
-## 🔮 扩展建议
-
-### 1. 主题系统集成
-
-```less
-// 定义滚动条主题变量
-@scrollbar-color: #e87782;
-@scrollbar-hover-color: #c98c92;
-@scrollbar-track-color: #ffffff;
-@scrollbar-width: 6px;
-
-// 创建可复用的 mixin
-.custom-scrollbar() {
-  scrollbar-width: thin;
-  scrollbar-color: @scrollbar-color @scrollbar-track-color;
-
-  &::-webkit-scrollbar {
-    width: @scrollbar-width;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: @scrollbar-track-color;
-    border-radius: 3px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: @scrollbar-color;
-    border-radius: 3px;
-
-    &:hover {
-      background: @scrollbar-hover-color;
-    }
-  }
-}
-```
-
-### 2. 动态主题支持
-
-```less
-// 支持暗色模式的滚动条
-[data-theme='dark'] {
-  .docContent {
-    scrollbar-color: #e87782 #2a2a2a;
-
-    &::-webkit-scrollbar-track {
-      background: #2a2a2a;
-    }
-  }
-}
-```
